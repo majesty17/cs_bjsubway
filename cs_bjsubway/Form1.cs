@@ -26,8 +26,9 @@ namespace cs_bjsubway
                 Console.Out.WriteLine(line["l_xmlattr"]["lb"]);
                 foreach (JsonData st in line["p"])
                 {
-                    bool if_st = st["p_xmlattr"]["st"].IsBoolean;
-                    if(if_st)
+                    string if_st = st["p_xmlattr"]["st"].ToString();
+                 //   Console.Out.WriteLine(if_st);
+                    if(if_st=="True")
                         Console.Out.WriteLine(st["p_xmlattr"]["ln"] + "---------" + st["p_xmlattr"]["lb"]);
                 }
             }
