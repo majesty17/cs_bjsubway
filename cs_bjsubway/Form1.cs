@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LitJson;
+using System.Xml.Linq;
 
 namespace cs_bjsubway
 {
@@ -20,18 +21,14 @@ namespace cs_bjsubway
 
         private void button1_Click(object sender, EventArgs e)
         {
-            JsonData data = Util.get_subway_data(131, "json");
-            foreach (JsonData line in data["subways"]["l"])
-            {
-                Console.Out.WriteLine(line["l_xmlattr"]["lb"]);
-                foreach (JsonData st in line["p"])
-                {
-                    string if_st = st["p_xmlattr"]["st"].ToString();
-                 //   Console.Out.WriteLine(if_st);
-                    if(if_st=="True")
-                        Console.Out.WriteLine(st["p_xmlattr"]["ln"] + "---------" + st["p_xmlattr"]["lb"]);
-                }
-            }
+            XDocument data = Util.get_subway_data_xml(131);
+            XElement root = data.Root;
+            Util.print_data(root);
+
+
+
         }
+
+
     }
 }
