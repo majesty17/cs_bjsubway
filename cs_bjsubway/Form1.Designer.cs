@@ -59,10 +59,10 @@
             this.listView_lines.GridLines = true;
             this.listView_lines.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView_lines.HideSelection = false;
-            this.listView_lines.Location = new System.Drawing.Point(12, 141);
+            this.listView_lines.Location = new System.Drawing.Point(12, 136);
             this.listView_lines.MultiSelect = false;
             this.listView_lines.Name = "listView_lines";
-            this.listView_lines.Size = new System.Drawing.Size(186, 678);
+            this.listView_lines.Size = new System.Drawing.Size(186, 683);
             this.listView_lines.TabIndex = 2;
             this.listView_lines.UseCompatibleStateImageBehavior = false;
             this.listView_lines.View = System.Windows.Forms.View.Details;
@@ -70,7 +70,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Line";
-            this.columnHeader1.Width = 170;
+            this.columnHeader1.Width = 180;
             // 
             // pictureBox1
             // 

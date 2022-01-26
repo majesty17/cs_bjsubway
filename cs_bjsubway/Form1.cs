@@ -79,8 +79,6 @@ namespace cs_bjsubway
                 return;// Util.draw(pictureBox1, root);
             Console.Out.WriteLine("======= in paint() ========");
             Console.Out.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"));
-            Console.Out.WriteLine("offset now is : " + offset.X + "," + offset.Y);
-            Console.Out.WriteLine("scale is : " + scale_lvl);
             this.refreshTitle();
 
             //保留已画过的换乘站
@@ -91,7 +89,7 @@ namespace cs_bjsubway
             Graphics g = e.Graphics;
             Size g_size = pictureBox1.Size;
             float scale = Util.getScale(g_size, scale_lvl);
-            Font drawFont = new Font("Arial", 8 * scale);
+            Font drawFont = new Font("Arial", 8 * scale, FontStyle.Bold);
             Font drawFont_p = new Font("Arial", 7 * scale);
 
             foreach (var l in lines)
