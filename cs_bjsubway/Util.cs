@@ -148,9 +148,9 @@ namespace cs_bjsubway
                 return 0;
             if (str_f.IndexOf('.') != str_f.LastIndexOf('.'))
             {
-                Console.WriteLine("strange float found!" + str_f);
+                //Console.WriteLine("strange float found!" + str_f);
                 string str_new = str_f.Substring(0, str_f.LastIndexOf('.'));
-                Console.WriteLine("new str is !" + str_new);
+                //Console.WriteLine("new str is !" + str_new);
                 return float.Parse(str_new);
             }
             else

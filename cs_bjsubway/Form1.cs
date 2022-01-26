@@ -18,10 +18,13 @@ namespace cs_bjsubway
         private bool mouse_pressed = false;
         //偏移和缩放
         private PointF offset = new PointF(0, 0);
-        private PointF offset_tmp;
+        private PointF offset_his = new PointF(0, 0);
+        private PointF offset_tmp = new PointF(0, 0);
         private int scale_lvl = 1;
         private int scale_max = 7;
         private List<Line> lines = null;
+
+        private string app_name = "bj-subway";
 
 
 
@@ -29,6 +32,7 @@ namespace cs_bjsubway
         {
             InitializeComponent();
             pictureBox1.MouseWheel += new MouseEventHandler(this.pictureBox1_MouseWheel);
+            refreshTitle();
         }
 
         //点击draw
@@ -77,7 +81,7 @@ namespace cs_bjsubway
             Console.Out.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"));
             Console.Out.WriteLine("offset now is : " + offset.X + "," + offset.Y);
             Console.Out.WriteLine("scale is : " + scale_lvl);
-
+            this.refreshTitle();
 
             //保留已画过的换乘站
             List<string> ex_P = new List<string>();
@@ -196,33 +200,44 @@ namespace cs_bjsubway
         //按下左键
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            Console.Out.WriteLine("mouse down");
-            offset_tmp = new PointF(e.X, e.Y);
+            if (lines == null)
+                return;
+            //需要临时保存offset为his，后续的拖动都是基于his进行变化；
+            offset_tmp.X = e.X;
+            offset_tmp.Y = e.Y;
+            offset_his.X = offset.X;
+            offset_his.Y = offset.Y;
+            Console.Out.WriteLine("mouse down: e pos:" + e.X + "," + e.Y);
             mouse_pressed = true;
+            pictureBox1.Cursor = Cursors.SizeAll;
         }
         //弹起左键
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            if (lines == null)
+                return;
             if (mouse_pressed)
             {
-                Console.Out.WriteLine("mouse up");
-                offset.X = offset.X + (e.X - offset_tmp.X);
-                offset.Y = offset.Y + (e.Y - offset_tmp.Y);
                 mouse_pressed = false;
-                Console.Out.WriteLine("offset now is :" + offset.X + "," + offset.Y);
-                pictureBox1.Refresh();
+                Console.Out.WriteLine("mouse up: e pos:" + e.X + "," + e.Y);
+                pictureBox1.Cursor = Cursors.Arrow;
             }
-            else
-            {
-                Console.Out.WriteLine("未出现鼠标donw的情况下检测到鼠标up！");
-            }
+
         }
 
-        //鼠标移动，废弃
+        //鼠标移动
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if(mouse_pressed)
-                Console.Out.WriteLine("mount moving...");
+            if (lines == null)
+                return;
+            if (mouse_pressed)
+            {
+
+                offset.X = offset_his.X + e.X - offset_tmp.X;
+                offset.Y = offset_his.Y + e.Y - offset_tmp.Y;
+                pictureBox1.Refresh();
+//                Console.Out.WriteLine("moving(): e pos:" + e.X + "," + e.Y);
+            }
 
         }
 
@@ -240,6 +255,11 @@ namespace cs_bjsubway
             if (scale_lvl > scale_max) scale_lvl = scale_max;
             Console.Out.WriteLine(scale_lvl);
             pictureBox1.Refresh();
+        }
+
+        private void refreshTitle()
+        {
+            this.Text = string.Format("{0} - offset: x={1}, y={2}; scale level: {3}", this.app_name, offset.X, offset.Y, scale_lvl);
         }
 
 

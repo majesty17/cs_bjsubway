@@ -33,8 +33,8 @@ https://map.baidu.com/?qt=subways&c=131
 |slb|2| 更简化的编号，不统一，废弃|
 |n|18|?|
 |loop|true|是否是环线|
-|lbx|-175.3|线路名位置？|
-|lby|-4.9|同上|
+|lbx|-175.3|线路名位置|
+|lby|-4.9|线路名位置|
 |lbr|0.0|？|
 |lc|0x005f98|无重复，线路颜色|
 |uid|9dc3b3dab4becfaea2a934b7|无重复，不统一，废弃|
