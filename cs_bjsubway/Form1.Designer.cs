@@ -35,6 +35,8 @@
             this.button_reset = new System.Windows.Forms.Button();
             this.button_select_all = new System.Windows.Forms.Button();
             this.button_select_no = new System.Windows.Forms.Button();
+            this.button_scale_up = new System.Windows.Forms.Button();
+            this.button_scale_down = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,12 +132,38 @@
             this.button_select_no.UseVisualStyleBackColor = false;
             this.button_select_no.Click += new System.EventHandler(this.button_select_no_Click);
             // 
+            // button_scale_up
+            // 
+            this.button_scale_up.BackColor = System.Drawing.SystemColors.WindowText;
+            this.button_scale_up.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_scale_up.Location = new System.Drawing.Point(228, 22);
+            this.button_scale_up.Name = "button_scale_up";
+            this.button_scale_up.Size = new System.Drawing.Size(36, 36);
+            this.button_scale_up.TabIndex = 7;
+            this.button_scale_up.Text = "+";
+            this.button_scale_up.UseVisualStyleBackColor = false;
+            this.button_scale_up.Click += new System.EventHandler(this.button_scale_up_Click);
+            // 
+            // button_scale_down
+            // 
+            this.button_scale_down.BackColor = System.Drawing.SystemColors.WindowText;
+            this.button_scale_down.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_scale_down.Location = new System.Drawing.Point(228, 64);
+            this.button_scale_down.Name = "button_scale_down";
+            this.button_scale_down.Size = new System.Drawing.Size(36, 36);
+            this.button_scale_down.TabIndex = 8;
+            this.button_scale_down.Text = "-";
+            this.button_scale_down.UseVisualStyleBackColor = false;
+            this.button_scale_down.Click += new System.EventHandler(this.button_scale_down_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1275, 831);
+            this.Controls.Add(this.button_scale_down);
+            this.Controls.Add(this.button_scale_up);
             this.Controls.Add(this.button_select_no);
             this.Controls.Add(this.button_select_all);
             this.Controls.Add(this.button_reset);
@@ -159,6 +187,8 @@
         private System.Windows.Forms.Button button_reset;
         private System.Windows.Forms.Button button_select_all;
         private System.Windows.Forms.Button button_select_no;
+        private System.Windows.Forms.Button button_scale_up;
+        private System.Windows.Forms.Button button_scale_down;
     }
 }
 

@@ -33,6 +33,7 @@ namespace cs_bjsubway
             InitializeComponent();
             pictureBox1.MouseWheel += new MouseEventHandler(this.pictureBox1_MouseWheel);
             refreshTitle();
+
         }
 
         //点击draw
@@ -90,6 +91,7 @@ namespace cs_bjsubway
 
 
             Graphics g = e.Graphics;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             Size g_size = pictureBox1.Size;
             float scale = Util.getScale(g_size, scale_lvl);
             Font drawFont = new Font("Arial", 8 * scale, FontStyle.Bold);
@@ -249,7 +251,7 @@ namespace cs_bjsubway
         //滚轮缩放
         private void pictureBox1_MouseWheel(object sender,MouseEventArgs e)
         {
-
+            if (lines == null) return;
             if (e.Delta > 0)
                 scale_lvl++;
             else if (e.Delta < 0)
@@ -258,7 +260,7 @@ namespace cs_bjsubway
             //超范围修正
             if (scale_lvl <= 0) scale_lvl = 1;
             if (scale_lvl > scale_max) scale_lvl = scale_max;
-            Console.Out.WriteLine(scale_lvl);
+           // Console.Out.WriteLine(scale_lvl);
             pictureBox1.Refresh();
         }
 
@@ -271,7 +273,7 @@ namespace cs_bjsubway
         private void listView_lines_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             check_list.Clear();
-            Console.Out.WriteLine(listView_lines.CheckedItems.Count);
+            //Console.Out.WriteLine(listView_lines.CheckedItems.Count);
             for(int i=0;i<listView_lines.CheckedItems.Count;i++)
             {
                 ListViewItem lvi = listView_lines.CheckedItems[i];
@@ -305,5 +307,24 @@ namespace cs_bjsubway
             pictureBox1.Refresh();
         }
 
+        private void button_scale_up_Click(object sender, EventArgs e)
+        {
+            if (lines == null) return;
+            scale_lvl++;
+            //超范围修正
+            if (scale_lvl <= 0) scale_lvl = 1;
+            if (scale_lvl > scale_max) scale_lvl = scale_max;
+            pictureBox1.Refresh();
+        }
+
+        private void button_scale_down_Click(object sender, EventArgs e)
+        {
+            if (lines == null) return;
+            scale_lvl--;
+            //超范围修正
+            if (scale_lvl <= 0) scale_lvl = 1;
+            if (scale_lvl > scale_max) scale_lvl = scale_max;
+            pictureBox1.Refresh();
+        }
     }
 }
