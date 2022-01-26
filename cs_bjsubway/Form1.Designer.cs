@@ -33,6 +33,8 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_reset = new System.Windows.Forms.Button();
+            this.button_select_all = new System.Windows.Forms.Button();
+            this.button_select_no = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +46,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(195, 56);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Draw";
+            this.button1.Text = "绘图";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -60,10 +62,10 @@
             this.listView_lines.GridLines = true;
             this.listView_lines.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView_lines.HideSelection = false;
-            this.listView_lines.Location = new System.Drawing.Point(12, 136);
+            this.listView_lines.Location = new System.Drawing.Point(12, 179);
             this.listView_lines.MultiSelect = false;
             this.listView_lines.Name = "listView_lines";
-            this.listView_lines.Size = new System.Drawing.Size(195, 683);
+            this.listView_lines.Size = new System.Drawing.Size(195, 640);
             this.listView_lines.TabIndex = 2;
             this.listView_lines.UseCompatibleStateImageBehavior = false;
             this.listView_lines.View = System.Windows.Forms.View.Details;
@@ -100,9 +102,33 @@
             this.button_reset.Name = "button_reset";
             this.button_reset.Size = new System.Drawing.Size(195, 56);
             this.button_reset.TabIndex = 4;
-            this.button_reset.Text = "Reset";
+            this.button_reset.Text = "重置视角";
             this.button_reset.UseVisualStyleBackColor = false;
             this.button_reset.Click += new System.EventHandler(this.button_reset_Click);
+            // 
+            // button_select_all
+            // 
+            this.button_select_all.BackColor = System.Drawing.SystemColors.WindowText;
+            this.button_select_all.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_select_all.Location = new System.Drawing.Point(12, 138);
+            this.button_select_all.Name = "button_select_all";
+            this.button_select_all.Size = new System.Drawing.Size(95, 35);
+            this.button_select_all.TabIndex = 5;
+            this.button_select_all.Text = "全选";
+            this.button_select_all.UseVisualStyleBackColor = false;
+            this.button_select_all.Click += new System.EventHandler(this.button_select_all_Click);
+            // 
+            // button_select_no
+            // 
+            this.button_select_no.BackColor = System.Drawing.SystemColors.WindowText;
+            this.button_select_no.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.button_select_no.Location = new System.Drawing.Point(112, 138);
+            this.button_select_no.Name = "button_select_no";
+            this.button_select_no.Size = new System.Drawing.Size(95, 35);
+            this.button_select_no.TabIndex = 6;
+            this.button_select_no.Text = "反选";
+            this.button_select_no.UseVisualStyleBackColor = false;
+            this.button_select_no.Click += new System.EventHandler(this.button_select_no_Click);
             // 
             // Form1
             // 
@@ -110,6 +136,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(1275, 831);
+            this.Controls.Add(this.button_select_no);
+            this.Controls.Add(this.button_select_all);
             this.Controls.Add(this.button_reset);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.listView_lines);
@@ -129,6 +157,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button_reset;
+        private System.Windows.Forms.Button button_select_all;
+        private System.Windows.Forms.Button button_select_no;
     }
 }
 

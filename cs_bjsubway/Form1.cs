@@ -26,7 +26,7 @@ namespace cs_bjsubway
 
         private string app_name = "bj-subway";
         private List<string> check_list = new List<string>();
-
+        private bool list_ok = false;
 
         public Form1()
         {
@@ -61,6 +61,7 @@ namespace cs_bjsubway
         //更新list
         private void updateList(List<Line> ls)
         {
+            list_ok = false;
             listView_lines.Items.Clear();
             foreach (var l in ls)
             {
@@ -70,6 +71,7 @@ namespace cs_bjsubway
                 lvi.Checked = true;
                 listView_lines.Items.Add(lvi);
             }
+            list_ok = true;
         }
 
 
@@ -265,6 +267,7 @@ namespace cs_bjsubway
             this.Text = string.Format("{0} - offset: x={1}, y={2}; scale level: {3}", this.app_name, offset.X, offset.Y, scale_lvl);
         }
 
+        //选中
         private void listView_lines_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             check_list.Clear();
@@ -274,7 +277,33 @@ namespace cs_bjsubway
                 ListViewItem lvi = listView_lines.CheckedItems[i];
                 check_list.Add(lvi.Text);
             }
+            if(list_ok)
+                pictureBox1.Refresh();
+        }
+
+
+        //全选
+        private void button_select_all_Click(object sender, EventArgs e)
+        {
+            list_ok = false;
+            for(int i = 0; i < listView_lines.Items.Count; i++)
+            {
+                listView_lines.Items[i].Checked = true;
+            }
+            list_ok = true;
             pictureBox1.Refresh();
         }
+        //全不选
+        private void button_select_no_Click(object sender, EventArgs e)
+        {
+            list_ok = false;
+            for (int i = 0; i < listView_lines.Items.Count; i++)
+            {
+                listView_lines.Items[i].Checked = !listView_lines.Items[i].Checked;
+            }
+            list_ok = true;
+            pictureBox1.Refresh();
+        }
+
     }
 }
