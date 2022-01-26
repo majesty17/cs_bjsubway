@@ -25,7 +25,7 @@ namespace cs_bjsubway
         private List<Line> lines = null;
 
         private string app_name = "bj-subway";
-
+        private List<string> check_list = new List<string>();
 
 
         public Form1()
@@ -67,6 +67,7 @@ namespace cs_bjsubway
                 ListViewItem lvi = new ListViewItem(l.lb);
                 lvi.BackColor = l.lc;
                 lvi.ForeColor = Color.White;
+                lvi.Checked = true;
                 listView_lines.Items.Add(lvi);
             }
         }
@@ -95,6 +96,10 @@ namespace cs_bjsubway
             foreach (var l in lines)
             {
                 string lb = l.lb;
+                if (!check_list.Contains(lb))
+                {
+                    continue;
+                }
 
                 bool loop = l.loop;
                 Color cor = l.lc;
@@ -260,6 +265,16 @@ namespace cs_bjsubway
             this.Text = string.Format("{0} - offset: x={1}, y={2}; scale level: {3}", this.app_name, offset.X, offset.Y, scale_lvl);
         }
 
-
+        private void listView_lines_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            check_list.Clear();
+            Console.Out.WriteLine(listView_lines.CheckedItems.Count);
+            for(int i=0;i<listView_lines.CheckedItems.Count;i++)
+            {
+                ListViewItem lvi = listView_lines.CheckedItems[i];
+                check_list.Add(lvi.Text);
+            }
+            pictureBox1.Refresh();
+        }
     }
 }

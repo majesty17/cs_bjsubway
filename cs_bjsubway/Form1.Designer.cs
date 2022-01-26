@@ -42,7 +42,7 @@
             this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(186, 56);
+            this.button1.Size = new System.Drawing.Size(195, 56);
             this.button1.TabIndex = 0;
             this.button1.Text = "Draw";
             this.button1.UseVisualStyleBackColor = false;
@@ -53,6 +53,7 @@
             this.listView_lines.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.listView_lines.BackColor = System.Drawing.SystemColors.WindowText;
+            this.listView_lines.CheckBoxes = true;
             this.listView_lines.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
             this.listView_lines.FullRowSelect = true;
@@ -62,15 +63,16 @@
             this.listView_lines.Location = new System.Drawing.Point(12, 136);
             this.listView_lines.MultiSelect = false;
             this.listView_lines.Name = "listView_lines";
-            this.listView_lines.Size = new System.Drawing.Size(186, 683);
+            this.listView_lines.Size = new System.Drawing.Size(195, 683);
             this.listView_lines.TabIndex = 2;
             this.listView_lines.UseCompatibleStateImageBehavior = false;
             this.listView_lines.View = System.Windows.Forms.View.Details;
+            this.listView_lines.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView_lines_ItemChecked);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Line";
-            this.columnHeader1.Width = 180;
+            this.columnHeader1.Width = 190;
             // 
             // pictureBox1
             // 
@@ -80,9 +82,9 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.pictureBox1.Location = new System.Drawing.Point(204, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(213, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1059, 807);
+            this.pictureBox1.Size = new System.Drawing.Size(1050, 807);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -96,7 +98,7 @@
             this.button_reset.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.button_reset.Location = new System.Drawing.Point(12, 74);
             this.button_reset.Name = "button_reset";
-            this.button_reset.Size = new System.Drawing.Size(186, 56);
+            this.button_reset.Size = new System.Drawing.Size(195, 56);
             this.button_reset.TabIndex = 4;
             this.button_reset.Text = "Reset";
             this.button_reset.UseVisualStyleBackColor = false;
