@@ -34,7 +34,7 @@ https://map.baidu.com/?qt=subways&c=131
 |n|18|?|
 |loop|true|是否是环线|
 |lbx|-175.3|线路名位置？|
-|lby|-4.9"|同上|
+|lby|-4.9|同上|
 |lbr|0.0|？|
 |lc|0x005f98|无重复，线路颜色|
 |uid|9dc3b3dab4becfaea2a934b7|无重复，不统一，废弃|
@@ -49,10 +49,10 @@ https://map.baidu.com/?qt=subways&c=131
 | lb | 人民大学 | 站名too |
 | x | -319.6 | 站坐标 |
 | y | -34.0 | 站坐标 |
-| rx | 3 | ？ |
-| ry | -9.0 | ？ |
+| rx | 3 | 站名偏移 |
+| ry | -9.0 | 站名偏移 |
 | st | true | 是否是站 |
-| ex | false | ？ |
+| ex | false | 是否换乘站 |
 | iu | true | ？ |
 | rc | false | ？ |
 | slb | true | ？ |
