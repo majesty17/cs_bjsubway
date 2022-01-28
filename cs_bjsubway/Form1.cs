@@ -42,11 +42,13 @@ namespace cs_bjsubway
         {
             int city = ((ComboxItem)comboBox_city.SelectedItem).Values;
             Console.Out.WriteLine("selected city is " + city);
-            lines = Line.getLines(city);
+            lines = Line.getLines(city); 
             check_list.Clear();
             //Util.print_data(root);
             //Util.draw(pictureBox1, root);
 
+            scale_lvl = 1;
+            offset.X = offset.Y = 0;
             updateList(lines);
             pictureBox1.Refresh();
         }
@@ -64,6 +66,8 @@ namespace cs_bjsubway
         //更新list
         private void updateList(List<Line> ls)
         {
+            if (ls is null)
+                return;
             list_ok = false;
             listView_lines.Items.Clear();
             foreach (var l in ls)

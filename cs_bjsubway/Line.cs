@@ -56,6 +56,32 @@ namespace cs_bjsubway
         public Station[] stations;
 
 
+
+        //获取整个city视图的size，所有站的横向、纵向跨度
+        public PointF getSize(List<Line> lines)
+        {
+            float min_x = float.MaxValue;
+            float min_y = float.MaxValue;
+            float max_x = float.MinValue;
+            float max_y = float.MinValue;
+
+            for(int i = 0; i < lines.Count; i++)
+            {
+                Line line = lines[i];
+                for(int j = 0; j < line.stations.Length; j++)
+                {
+                    Station st = line.stations[j];
+                    max_x = st.x > max_x ? st.x : max_x;
+                    max_y = st.y > max_y ? st.y : max_y;
+                    min_x = st.x < min_x ? st.x : min_x;
+                    min_y = st.y < min_y ? st.y : min_y;
+                }
+            }
+
+            return new PointF(max_x - min_x, max_y - min_y);
+        }
+
+
         //通过一坨东西，拿到所有lines
         public static List<Line> getLines(XElement root)
         {
@@ -69,6 +95,8 @@ namespace cs_bjsubway
         public static List<Line> getLines(int city_code)
         {
             XDocument data = Util.get_subway_data_xml(city_code);
+            if (data == null)
+                return null;
             XElement root = data.Root;
             List<Line> ret = getLines(root);
             return ret;

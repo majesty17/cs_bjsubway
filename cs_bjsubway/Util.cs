@@ -17,7 +17,16 @@ namespace cs_bjsubway
             //string file = @"D:\git\cs_bjsubway\cs_bjsubway\data.xml";
 
             //return XDocument.Load(file);
-            return XDocument.Load(url);
+            try
+            {
+                return XDocument.Load(url);
+            }
+            catch(Exception e)
+            {
+
+                Console.Out.WriteLine("get line error!" + e.Message);
+                return null;
+            }
         }
 
         public static LitJson.JsonData get_cities()
