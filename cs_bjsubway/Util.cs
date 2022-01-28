@@ -135,6 +135,19 @@ namespace cs_bjsubway
             return new PointF(ret_x, ret_y);
         }
 
+        //偏移量也要根据scale的变化而变化!
+        public static PointF offsetTrans(int scale_old,int scale_new,PointF offset)
+        {
+            if (scale_new == scale_old)
+                return new PointF(offset.X, offset.Y);
+            else
+            {
+                float real_scale_old = (float)Math.Pow(base_scale, scale_old - 1);
+                float real_scale_new = (float)Math.Pow(base_scale, scale_new - 1);
+                return new PointF(offset.X / real_scale_old * real_scale_new, offset.Y / real_scale_old * real_scale_new);
+            }
+        }
+
 
         //获取字体，线条粗细等缩放级别；全局基本是矢量的；
         public static float getScale(Size g_size,int scale)

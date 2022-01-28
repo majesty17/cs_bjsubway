@@ -14,7 +14,7 @@ namespace cs_bjsubway
         {
             XAttribute att = null;
             this.sid = st.Attribute("sid").Value;
-
+            //坑！
             att = st.Attribute("lb");
             if (att is null)
                 att = st.Attribute("lsb");

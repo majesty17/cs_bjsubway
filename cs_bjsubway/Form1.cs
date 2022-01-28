@@ -199,6 +199,9 @@ namespace cs_bjsubway
                     g.DrawLine(pen, first, last);
                 }
 
+                //画个中心十字
+                g.DrawLine(Pens.Gray, g_size.Width / 2 - 10, g_size.Height / 2, g_size.Width / 2 + 10, g_size.Height / 2);
+                g.DrawLine(Pens.Gray, g_size.Width / 2, g_size.Height / 2 - 10, g_size.Width / 2, g_size.Height / 2 + 10);
 
             }
             Console.Out.WriteLine("======= end paint() ========");
@@ -253,6 +256,7 @@ namespace cs_bjsubway
         //滚轮缩放
         private void pictureBox1_MouseWheel(object sender,MouseEventArgs e)
         {
+            int scale_old = scale_lvl;
             if (lines == null) return;
             if (e.Delta > 0)
                 scale_lvl++;
@@ -262,7 +266,13 @@ namespace cs_bjsubway
             //超范围修正
             if (scale_lvl <= 0) scale_lvl = 1;
             if (scale_lvl > scale_max) scale_lvl = scale_max;
-           // Console.Out.WriteLine(scale_lvl);
+
+            // Console.Out.WriteLine(scale_lvl);
+
+            //注意这里一定是要调整offset的！
+            PointF offset_new = Util.offsetTrans(scale_old, scale_lvl, offset);
+            offset.X = offset_new.X;
+            offset.Y = offset_new.Y;
             pictureBox1.Refresh();
         }
 
