@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Drawing;
+using System.Net;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using LitJson;
 
 namespace cs_bjsubway
 {
@@ -17,6 +20,16 @@ namespace cs_bjsubway
             return XDocument.Load(url);
         }
 
+        public static LitJson.JsonData get_cities()
+        {
+            string url = "https://map.baidu.com/?qt=subwayscity";
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;
+            string str = wc.DownloadString(url);
+           // Console.Out.WriteLine(str);
+            JsonData jdata = JsonMapper.ToObject(str);
+            return jdata;
+        }
 
         public static void print_data(XElement data)
         {
@@ -144,13 +157,21 @@ namespace cs_bjsubway
         //把奇怪的小数（有两个.的）转换成float
         public static float ajustF(string str_f)
         {
-            if (str_f == "")
+            if (str_f == "" || str_f=="-")
                 return 0;
+
+            if (str_f.Contains("s"))
+            {
+                Console.WriteLine("strange float found!" + str_f);
+                string str_new = str_f.Substring(0, str_f.LastIndexOf('s'));
+                return float.Parse(str_new);
+            }
+
+
             if (str_f.IndexOf('.') != str_f.LastIndexOf('.'))
             {
-                //Console.WriteLine("strange float found!" + str_f);
+                Console.WriteLine("strange float found!" + str_f);
                 string str_new = str_f.Substring(0, str_f.LastIndexOf('.'));
-                //Console.WriteLine("new str is !" + str_new);
                 return float.Parse(str_new);
             }
             else

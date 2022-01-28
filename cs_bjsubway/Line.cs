@@ -60,5 +60,13 @@ namespace cs_bjsubway
             }
             return ret;
         }
+
+        public static List<Line> getLines(int city_code)
+        {
+            XDocument data = Util.get_subway_data_xml(city_code);
+            XElement root = data.Root;
+            List<Line> ret = getLines(root);
+            return ret;
+        }
     }
 }

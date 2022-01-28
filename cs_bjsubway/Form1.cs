@@ -23,8 +23,9 @@ namespace cs_bjsubway
         private int scale_lvl = 1;
         private int scale_max = 7;
         private List<Line> lines = null;
+        private List<City> cities = null;
 
-        private string app_name = "bj-subway";
+        private string app_name = "Subway";
         private List<string> check_list = new List<string>();
         private bool list_ok = false;
 
@@ -39,9 +40,10 @@ namespace cs_bjsubway
         //点击draw
         private void button1_Click(object sender, EventArgs e)
         {
-            XDocument data = Util.get_subway_data_xml(131);
-            XElement root = data.Root;
-            lines = Line.getLines(root);
+            int city = ((ComboxItem)comboBox_city.SelectedItem).Values;
+            Console.Out.WriteLine("selected city is " + city);
+            lines = Line.getLines(city);
+            check_list.Clear();
             //Util.print_data(root);
             //Util.draw(pictureBox1, root);
 
@@ -295,7 +297,7 @@ namespace cs_bjsubway
             list_ok = true;
             pictureBox1.Refresh();
         }
-        //全不选
+        //反选
         private void button_select_no_Click(object sender, EventArgs e)
         {
             list_ok = false;
@@ -325,6 +327,28 @@ namespace cs_bjsubway
             if (scale_lvl <= 0) scale_lvl = 1;
             if (scale_lvl > scale_max) scale_lvl = scale_max;
             pictureBox1.Refresh();
+        }
+        
+        
+        //开始获取城市
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            cities = City.getCities();
+            comboBox_city.Items.Clear();
+            for(int i = 0; i < cities.Count; i++)
+            {
+                ComboxItem item = new ComboxItem(cities[i].cn_name, cities[i].code);
+                comboBox_city.Items.Add(item);
+            }
+            comboBox_city.SelectedIndex = 0;
+
+        }
+
+
+        //
+        private void comboBox_city_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

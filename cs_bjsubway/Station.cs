@@ -17,6 +17,7 @@ namespace cs_bjsubway
 
             this.x = Util.ajustF(st.Attribute("x").Value);
             this.y = Util.ajustF(st.Attribute("y").Value);
+            
             this.rx = Util.ajustF(st.Attribute("rx").Value);
             this.ry = Util.ajustF(st.Attribute("ry").Value);
 

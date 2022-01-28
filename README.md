@@ -2,6 +2,7 @@
 
 ```
 https://map.baidu.com/?qt=subways&c=131
+https://map.baidu.com/?qt=subwayscity
 ```
 
 ## 字段含义(猜测)
@@ -69,5 +70,11 @@ https://map.baidu.com/?qt=subways&c=131
 
 ![examples](sample01.png "examples")
 
+![examples](sample02.png "examples")
 
+### 坑们
 
++ 各种坐标不是严格的数字，有两个小数点的，有-的，有空串，有夹杂字母的
++ attribute也有不规范的，例如上海高科西路站，rx写成了r5
++ 其他各种缺胳膊少腿的缺属性
++ 支持多个城市之后问题太多，先不一一适配了
