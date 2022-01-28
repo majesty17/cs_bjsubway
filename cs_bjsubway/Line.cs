@@ -14,7 +14,12 @@ namespace cs_bjsubway
         {
             this.lid = line.Attribute("lid").Value;
             this.lb = line.Attribute("lb").Value;
-            this.slb = line.Attribute("slb").Value;
+
+            //坑！
+            XAttribute att = line.Attribute("slb");
+            if (att is null)
+                att = line.Attribute("slsb");
+            this.slb = att.Value;
 
             this.loop = line.Attribute("loop").Value == "true" ? true : false;
 

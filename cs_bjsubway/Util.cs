@@ -162,15 +162,28 @@ namespace cs_bjsubway
 
             if (str_f.Contains("s"))
             {
-                Console.WriteLine("strange float found!" + str_f);
+                Console.WriteLine("strange float found! " + str_f);
                 string str_new = str_f.Substring(0, str_f.LastIndexOf('s'));
                 return float.Parse(str_new);
             }
 
+            if(str_f.Contains("--"))
+            {
+                Console.WriteLine("strange float found! " + str_f);
+                string str_new = str_f.Replace("--", "-");
+                return float.Parse(str_new);
+            }
+
+            if (str_f.Contains(".o"))
+            {
+                Console.WriteLine("strange float found! " + str_f);
+                string str_new = str_f.Replace(".o", "");
+                return float.Parse(str_new);
+            }
 
             if (str_f.IndexOf('.') != str_f.LastIndexOf('.'))
             {
-                Console.WriteLine("strange float found!" + str_f);
+                Console.WriteLine("strange float found! " + str_f);
                 string str_new = str_f.Substring(0, str_f.LastIndexOf('.'));
                 return float.Parse(str_new);
             }
