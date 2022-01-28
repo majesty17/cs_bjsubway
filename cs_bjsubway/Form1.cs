@@ -34,7 +34,6 @@ namespace cs_bjsubway
             InitializeComponent();
             pictureBox1.MouseWheel += new MouseEventHandler(this.pictureBox1_MouseWheel);
             refreshTitle();
-
         }
 
         //点击draw
@@ -86,9 +85,9 @@ namespace cs_bjsubway
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             if (lines == null)
-                return;// Util.draw(pictureBox1, root);
-            Console.Out.WriteLine("======= in paint() ========");
-            Console.Out.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"));
+                return;
+            DateTime st = DateTime.Now;
+
             this.refreshTitle();
 
             //保留已画过的换乘站
@@ -97,7 +96,7 @@ namespace cs_bjsubway
 
 
             Graphics g = e.Graphics;
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
             Size g_size = pictureBox1.Size;
             float scale = Util.getScale(g_size, scale_lvl);
             Font drawFont = new Font("Arial", 8 * scale, FontStyle.Bold);
@@ -105,61 +104,60 @@ namespace cs_bjsubway
 
             foreach (var l in lines)
             {
-                string lb = l.lb;
-                if (!check_list.Contains(lb))
+                if (!check_list.Contains(l.lb))//没勾选的不画
                 {
                     continue;
                 }
 
-                bool loop = l.loop;
-                Color cor = l.lc;
 
+
+                Brush brush = new SolidBrush(l.lc);
+                Pen pen = new Pen(l.lc);
+
+                //写线路名
                 float lbx_f = l.lbx;
                 float lby_f = l.lby;
+                PointF pf = new PointF(lbx_f, lby_f);
+                Util.pointTrans(g_size, ref pf, offset, scale_lvl);
+                g.DrawString(l.lb, drawFont, brush, pf);
 
-                PointF pf = Util.pointTrans(g_size, new PointF(lbx_f, lby_f), offset, scale_lvl);
-                Brush brush = new SolidBrush(cor);
-                Pen pen = new Pen(cor);
 
-                //线路名
-                g.DrawString(lb, drawFont, brush, pf);
-
-                //用来保存第一站和最后一站的真实坐标
-                PointF last = new PointF(-99999, -99999);
-                PointF first = new PointF(-9999999, -9999999999);
+                //写站名，站点圆圈
                 foreach (var p in l.stations)
                 {
                     string sid = p.sid;
                     string _lb = p.lb;
-                    //是否是站，是否是换乘站
-                    bool st = p.st;
-                    bool ex = p.ex;
 
+                    //一次性画完线路
+                    PointF[] pts = l.getStationsPoints();
+                    for (int i = 0; i < pts.Length; i++)
+                    {
+                        Util.pointTrans(g_size, ref pts[i], offset, scale_lvl);
+                    }
+                    pen.Width = scale * 2;
+                    g.DrawLines(pen, pts);
+                    //g.DrawCurve(pen, pts);  //比drawlines耗时增加1倍。。。
 
-                    //站点圈圈坐标
-                    float px_f = p.x;
-                    float py_f = p.y;
                     //站点圆圈实际坐标
-                    PointF ppf = Util.pointTrans(g_size, new PointF(px_f, py_f), offset, scale_lvl);
+                    PointF ppf = new PointF(p.x, p.y);
+                    Util.pointTrans(g_size, ref ppf, offset, scale_lvl);
 
-                    //字标偏移
-                    float prx_f = p.rx;
-                    float pry_f = p.ry;
-                    //字标实际坐标   
-                    PointF ppf_str = Util.pointTrans(g_size, new PointF(px_f + prx_f, py_f + pry_f), offset, scale_lvl);
+                    //站名实际坐标   
+                    PointF ppf_str = new PointF(p.x + p.rx, p.y + p.ry);
+                    Util.pointTrans(g_size, ref ppf_str, offset, scale_lvl);
 
                     //是站的话，画站
-                    if (st)
+                    if (p.st)
                     {
                         //画站点圆圈
-                        float radio = 11 * scale / 2; //圆的半径
-                        PointF p_0 = new PointF(ppf.X - radio, ppf.Y - radio);
+                        float rad = 11 * scale / 2; //圆的半径
+                        PointF p_0 = new PointF(ppf.X - rad, ppf.Y - rad);
                         g.FillEllipse(brush, new RectangleF(p_0, new SizeF(11 * scale, 11 * scale)));
 
 
-
-                        if (ex == false)
-                        { //不是换乘站,只写站名
+                        //不是换乘站,只写站名
+                        if (p.ex == false)
+                        { 
                             g.DrawString(sid, drawFont_p, Brushes.White, ppf_str.X, ppf_str.Y);
                         }
                         else//是换乘站的话，加到已经画过的list里；
@@ -169,47 +167,30 @@ namespace cs_bjsubway
                                 //不在已画过的换乘站的话，才画站名
                                 g.DrawString(sid, drawFont_p, Brushes.White, ppf_str.X, ppf_str.Y);
                                 //并且覆盖白色圆环
-                                radio = 13 * scale / 2; //圆的半径
+                                rad = 13 * scale / 2; //圆的半径
 
-                                p_0 = new PointF(ppf.X - radio, ppf.Y - radio);
+                                p_0 = new PointF(ppf.X - rad, ppf.Y - rad);
                                 Pen pen_ex = new Pen(Color.White, scale * 2);
                                 g.DrawEllipse(pen_ex, new RectangleF(p_0, new SizeF(13 * scale, 13 * scale)));
 
                             }
-                            ex_P.Add(sid);//干完事情再加进去。。
+                            ex_P.Add(sid);//记录换乘站为已经写过
                         }
 
                     }
 
-                    //如果不是第一站，则画线
-                    if (last.X != -99999)
-                    {
-                        pen.Width = scale * 2;
-                        g.DrawLine(pen, ppf, last);
-                    }
-                    else //等于的话，说明是第一站
-                    {
-                        first.X = ppf.X;
-                        first.Y = ppf.Y;
-                    }
 
-                    last.X = ppf.X;
-                    last.Y = ppf.Y;
-                }
-                //是环线的话，首尾连上
-                if (loop)
-                {
-                    pen.Width = scale * 2;
-                    g.DrawLine(pen, first, last);
                 }
 
-                //画个中心十字
-                g.DrawLine(Pens.Gray, g_size.Width / 2 - 10, g_size.Height / 2, g_size.Width / 2 + 10, g_size.Height / 2);
-                g.DrawLine(Pens.Gray, g_size.Width / 2, g_size.Height / 2 - 10, g_size.Width / 2, g_size.Height / 2 + 10);
 
-            }
-            Console.Out.WriteLine("======= end paint() ========");
-            Console.Out.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss:fff"));
+
+            }//end of line
+
+            //画个中心十字
+            g.DrawLine(Pens.Gray, g_size.Width / 2 - 10, g_size.Height / 2, g_size.Width / 2 + 10, g_size.Height / 2);
+            g.DrawLine(Pens.Gray, g_size.Width / 2, g_size.Height / 2 - 10, g_size.Width / 2, g_size.Height / 2 + 10);
+            DateTime et = DateTime.Now;
+            Console.Out.WriteLine(string.Format("Paint() time cost: {0} sec", (et - st).ToString()));
         }//end of paint
 
 
@@ -223,7 +204,7 @@ namespace cs_bjsubway
             offset_tmp.Y = e.Y;
             offset_his.X = offset.X;
             offset_his.Y = offset.Y;
-            Console.Out.WriteLine("mouse down: e pos:" + e.X + "," + e.Y);
+            //Console.Out.WriteLine("mouse down: e pos:" + e.X + "," + e.Y);
             mouse_pressed = true;
             pictureBox1.Cursor = Cursors.SizeAll;
         }
@@ -235,7 +216,7 @@ namespace cs_bjsubway
             if (mouse_pressed)
             {
                 mouse_pressed = false;
-                Console.Out.WriteLine("mouse up: e pos:" + e.X + "," + e.Y);
+                //Console.Out.WriteLine("mouse up: e pos:" + e.X + "," + e.Y);
                 pictureBox1.Cursor = Cursors.Arrow;
             }
 
@@ -362,7 +343,6 @@ namespace cs_bjsubway
         //
         private void comboBox_city_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

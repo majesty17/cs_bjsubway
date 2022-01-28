@@ -57,8 +57,41 @@ namespace cs_bjsubway
 
 
 
+
+        //获取这条线路的所有station的站点位置
+        public PointF[] getStationsPoints()
+        {
+            PointF[] ret = null;
+            if (this.loop)
+                ret = new PointF[stations.Length + 1];
+            else
+                ret = new PointF[stations.Length];
+
+            for (int i = 0; i < stations.Length; i++)
+            {
+                ret[i].X = stations[i].x;
+                ret[i].Y = stations[i].y;
+            }
+
+            if (this.loop)
+            {
+                ret[stations.Length].X = ret[0].X;
+                ret[stations.Length].Y = ret[0].Y;
+            }
+
+            return ret; 
+        }
+
+
+
+
+
+
+
+
+
         //获取整个city视图的size，所有站的横向、纵向跨度
-        public PointF getSize(List<Line> lines)
+        public static PointF getSize(List<Line> lines)
         {
             float min_x = float.MaxValue;
             float min_y = float.MaxValue;
@@ -80,6 +113,10 @@ namespace cs_bjsubway
 
             return new PointF(max_x - min_x, max_y - min_y);
         }
+
+
+
+
 
 
         //通过一坨东西，拿到所有lines

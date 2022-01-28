@@ -114,7 +114,7 @@ namespace cs_bjsubway
          * offset：控件内缩放级别
          **/
         
-        public static PointF pointTrans(Size g_size,PointF p,PointF offset, int scale)
+        public static void pointTrans(Size g_size,ref PointF p,PointF offset, int scale)
         {
 
             float real_scale = (float)Math.Pow(base_scale, scale - 1);
@@ -140,8 +140,11 @@ namespace cs_bjsubway
             //后进行偏移，否则偏移不是真正的偏移。。确定是缩放中心会变。。
             ret_x += offset.X;
             ret_y += offset.Y;
+            
+            p.X = ret_x;
+            p.Y = ret_y;
 
-            return new PointF(ret_x, ret_y);
+            return;// new PointF(ret_x, ret_y);
         }
 
         //偏移量也要根据scale的变化而变化!
@@ -212,7 +215,6 @@ namespace cs_bjsubway
             else
                 return float.Parse(str_f);
         }
-
 
     }
 }
