@@ -38,17 +38,18 @@
             this.button_scale_up = new System.Windows.Forms.Button();
             this.button_scale_down = new System.Windows.Forms.Button();
             this.comboBox_city = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.SystemColors.WindowText;
-            this.button1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button1.Location = new System.Drawing.Point(9, 33);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button1.Location = new System.Drawing.Point(12, 41);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(146, 45);
+            this.button1.Size = new System.Drawing.Size(195, 56);
             this.button1.TabIndex = 0;
             this.button1.Text = "绘图";
             this.button1.UseVisualStyleBackColor = false;
@@ -66,11 +67,11 @@
             this.listView_lines.GridLines = true;
             this.listView_lines.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listView_lines.HideSelection = false;
-            this.listView_lines.Location = new System.Drawing.Point(9, 165);
-            this.listView_lines.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listView_lines.Location = new System.Drawing.Point(12, 206);
+            this.listView_lines.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listView_lines.MultiSelect = false;
             this.listView_lines.Name = "listView_lines";
-            this.listView_lines.Size = new System.Drawing.Size(147, 491);
+            this.listView_lines.Size = new System.Drawing.Size(195, 613);
             this.listView_lines.TabIndex = 2;
             this.listView_lines.UseCompatibleStateImageBehavior = false;
             this.listView_lines.View = System.Windows.Forms.View.Details;
@@ -89,10 +90,10 @@
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.pictureBox1.Location = new System.Drawing.Point(160, 10);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(213, 12);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(788, 646);
+            this.pictureBox1.Size = new System.Drawing.Size(1050, 807);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -103,11 +104,11 @@
             // button_reset
             // 
             this.button_reset.BackColor = System.Drawing.SystemColors.WindowText;
-            this.button_reset.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_reset.Location = new System.Drawing.Point(9, 82);
-            this.button_reset.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_reset.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_reset.Location = new System.Drawing.Point(12, 102);
+            this.button_reset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_reset.Name = "button_reset";
-            this.button_reset.Size = new System.Drawing.Size(146, 45);
+            this.button_reset.Size = new System.Drawing.Size(195, 56);
             this.button_reset.TabIndex = 4;
             this.button_reset.Text = "重置视角";
             this.button_reset.UseVisualStyleBackColor = false;
@@ -116,11 +117,11 @@
             // button_select_all
             // 
             this.button_select_all.BackColor = System.Drawing.SystemColors.WindowText;
-            this.button_select_all.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_select_all.Location = new System.Drawing.Point(8, 132);
-            this.button_select_all.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_select_all.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_select_all.Location = new System.Drawing.Point(11, 165);
+            this.button_select_all.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_select_all.Name = "button_select_all";
-            this.button_select_all.Size = new System.Drawing.Size(71, 28);
+            this.button_select_all.Size = new System.Drawing.Size(95, 35);
             this.button_select_all.TabIndex = 5;
             this.button_select_all.Text = "全选";
             this.button_select_all.UseVisualStyleBackColor = false;
@@ -129,11 +130,11 @@
             // button_select_no
             // 
             this.button_select_no.BackColor = System.Drawing.SystemColors.WindowText;
-            this.button_select_no.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_select_no.Location = new System.Drawing.Point(84, 132);
-            this.button_select_no.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_select_no.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_select_no.Location = new System.Drawing.Point(112, 165);
+            this.button_select_no.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_select_no.Name = "button_select_no";
-            this.button_select_no.Size = new System.Drawing.Size(71, 28);
+            this.button_select_no.Size = new System.Drawing.Size(95, 35);
             this.button_select_no.TabIndex = 6;
             this.button_select_no.Text = "反选";
             this.button_select_no.UseVisualStyleBackColor = false;
@@ -142,11 +143,11 @@
             // button_scale_up
             // 
             this.button_scale_up.BackColor = System.Drawing.SystemColors.WindowText;
-            this.button_scale_up.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_scale_up.Location = new System.Drawing.Point(171, 18);
-            this.button_scale_up.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_scale_up.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_scale_up.Location = new System.Drawing.Point(228, 22);
+            this.button_scale_up.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_scale_up.Name = "button_scale_up";
-            this.button_scale_up.Size = new System.Drawing.Size(27, 29);
+            this.button_scale_up.Size = new System.Drawing.Size(36, 36);
             this.button_scale_up.TabIndex = 7;
             this.button_scale_up.Text = "+";
             this.button_scale_up.UseVisualStyleBackColor = false;
@@ -155,11 +156,11 @@
             // button_scale_down
             // 
             this.button_scale_down.BackColor = System.Drawing.SystemColors.WindowText;
-            this.button_scale_down.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button_scale_down.Location = new System.Drawing.Point(171, 51);
-            this.button_scale_down.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button_scale_down.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.button_scale_down.Location = new System.Drawing.Point(228, 64);
+            this.button_scale_down.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button_scale_down.Name = "button_scale_down";
-            this.button_scale_down.Size = new System.Drawing.Size(27, 29);
+            this.button_scale_down.Size = new System.Drawing.Size(36, 36);
             this.button_scale_down.TabIndex = 8;
             this.button_scale_down.Text = "-";
             this.button_scale_down.UseVisualStyleBackColor = false;
@@ -167,24 +168,35 @@
             // 
             // comboBox_city
             // 
-            this.comboBox_city.BackColor = System.Drawing.SystemColors.WindowText;
+            this.comboBox_city.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.comboBox_city.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_city.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.comboBox_city.ForeColor = System.Drawing.SystemColors.Control;
+            this.comboBox_city.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox_city.ForeColor = System.Drawing.SystemColors.Highlight;
             this.comboBox_city.FormattingEnabled = true;
-            this.comboBox_city.Location = new System.Drawing.Point(9, 10);
-            this.comboBox_city.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox_city.Location = new System.Drawing.Point(89, 12);
+            this.comboBox_city.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox_city.Name = "comboBox_city";
-            this.comboBox_city.Size = new System.Drawing.Size(147, 20);
+            this.comboBox_city.Size = new System.Drawing.Size(118, 23);
             this.comboBox_city.TabIndex = 9;
             this.comboBox_city.SelectedIndexChanged += new System.EventHandler(this.comboBox_city_SelectedIndexChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 15);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "选择城市";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(956, 665);
+            this.ClientSize = new System.Drawing.Size(1275, 831);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox_city);
             this.Controls.Add(this.button_scale_down);
             this.Controls.Add(this.button_scale_up);
@@ -195,12 +207,13 @@
             this.Controls.Add(this.listView_lines);
             this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -216,6 +229,7 @@
         private System.Windows.Forms.Button button_scale_up;
         private System.Windows.Forms.Button button_scale_down;
         private System.Windows.Forms.ComboBox comboBox_city;
+        private System.Windows.Forms.Label label1;
     }
 }
 

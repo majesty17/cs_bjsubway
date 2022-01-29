@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using LitJson;
-using System.Xml.Linq;
 
 namespace cs_bjsubway
 {
@@ -256,9 +249,7 @@ namespace cs_bjsubway
             // Console.Out.WriteLine(scale_lvl);
 
             //注意这里一定是要调整offset的！
-            PointF offset_new = Util.offsetTrans(scale_old, scale_lvl, offset);
-            offset.X = offset_new.X;
-            offset.Y = offset_new.Y;
+            Util.offsetTrans(scale_old, scale_lvl, ref offset);
             pictureBox1.Refresh();
         }
 

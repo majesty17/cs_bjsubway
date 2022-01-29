@@ -2,8 +2,6 @@
 using System.Drawing;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Xml.Linq;
 using LitJson;
 
@@ -11,6 +9,8 @@ namespace cs_bjsubway
 {
     class Util
     {
+
+        //通过城市id获取所有地铁线路数据
         public static XDocument get_subway_data_xml(int city_id)
         {
             string url = string.Format("https://map.baidu.com/?qt=subways&c={0}", city_id);
@@ -29,6 +29,7 @@ namespace cs_bjsubway
             }
         }
 
+        //获取城市列表
         public static LitJson.JsonData get_cities()
         {
             string url = "https://map.baidu.com/?qt=subwayscity";
@@ -99,10 +100,12 @@ namespace cs_bjsubway
         /// 
         /// final: x[-1540:950]=2490
         /// final: y[-530:1120]=1650
+        /// 这个应该根据每个城市动态变化的
         private static float W = 2490f;
         private static float H = 1650f;
         private static float x_0 = -1540f;
         private static float y_0 = -530f;
+        //缩放的倍数，即相邻缩放级别之间的放大倍数
         private static float base_scale = 1.555f;
         
 
@@ -111,9 +114,8 @@ namespace cs_bjsubway
          * g_size:控件的size
          * p:原始位点
          * offset:控件内偏移
-         * offset：控件内缩放级别
+         * scale：控件内缩放级别
          **/
-        
         public static void pointTrans(Size g_size,ref PointF p,PointF offset, int scale)
         {
 
@@ -133,30 +135,33 @@ namespace cs_bjsubway
                 ret_x = (p.X - x_0) * g_h / H + (g_w - g_h * W / H) / 2;
             }
 
-            //先处理缩放，默认从中点？后续可以优化成从鼠标位置；
+            //先处理缩放，默认从中点；后续可以优化成从鼠标位置；
             ret_x = (ret_x - g_w / 2) * real_scale + g_w / 2;
             ret_y = (ret_y - g_h / 2) * real_scale + g_h / 2;
 
-            //后进行偏移，否则偏移不是真正的偏移。。确定是缩放中心会变。。
+            //后进行偏移，否则偏移不是真正的偏移
             ret_x += offset.X;
             ret_y += offset.Y;
-            
+            //回填
             p.X = ret_x;
             p.Y = ret_y;
 
-            return;// new PointF(ret_x, ret_y);
+            return;
         }
 
         //偏移量也要根据scale的变化而变化!
-        public static PointF offsetTrans(int scale_old,int scale_new,PointF offset)
+        public static void offsetTrans(int scale_old,int scale_new,ref PointF offset)
         {
+            //缩放级别不变的话，offset不变
             if (scale_new == scale_old)
-                return new PointF(offset.X, offset.Y);
+                return;
             else
             {
                 float real_scale_old = (float)Math.Pow(base_scale, scale_old - 1);
                 float real_scale_new = (float)Math.Pow(base_scale, scale_new - 1);
-                return new PointF(offset.X / real_scale_old * real_scale_new, offset.Y / real_scale_old * real_scale_new);
+                offset.X = offset.X / real_scale_old * real_scale_new;
+                offset.Y = offset.Y / real_scale_old * real_scale_new;
+                return;
             }
         }
 
@@ -179,7 +184,7 @@ namespace cs_bjsubway
         }
 
 
-        //把奇怪的小数（有两个.的）转换成float
+        //把奇怪的小数（有两个.的等等）转换成float
         public static float ajustF(string str_f)
         {
             if (str_f == "" || str_f=="-")
