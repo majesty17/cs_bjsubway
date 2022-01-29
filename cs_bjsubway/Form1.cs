@@ -36,15 +36,14 @@ namespace cs_bjsubway
             refreshTitle();
         }
 
-        //点击draw
+        //点击draw，获取lines，初始化缩放级别
         private void button1_Click(object sender, EventArgs e)
         {
             int city = ((ComboxItem)comboBox_city.SelectedItem).Values;
             Console.Out.WriteLine("selected city is " + city);
             lines = Line.getLines(city); 
             check_list.Clear();
-            //Util.print_data(root);
-            //Util.draw(pictureBox1, root);
+
 
             scale_lvl = 1;
             offset.X = offset.Y = 0;
@@ -93,14 +92,13 @@ namespace cs_bjsubway
             //保留已画过的换乘站
             List<string> ex_P = new List<string>();
 
-
-
+            Size g_size = pictureBox1.Size;
             Graphics g = e.Graphics;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-            Size g_size = pictureBox1.Size;
+
             float scale = Util.getScale(g_size, scale_lvl);
-            Font drawFont = new Font("Arial", 8 * scale, FontStyle.Bold);
-            Font drawFont_p = new Font("Arial", 7 * scale);
+            Font drawFont = new Font("宋体", 8 * scale, FontStyle.Bold);
+            Font drawFont_p = new Font("宋体", 7 * scale);
 
             foreach (var l in lines)
             {
@@ -135,7 +133,7 @@ namespace cs_bjsubway
                         Util.pointTrans(g_size, ref pts[i], offset, scale_lvl);
                     }
                     pen.Width = scale * 2;
-                    g.DrawLines(pen, pts);
+                    g.DrawLines(pen, pts); //总26ms，这里消耗大约7-9ms
                     //g.DrawCurve(pen, pts);  //比drawlines耗时增加1倍。。。
 
                     //站点圆圈实际坐标
@@ -145,19 +143,20 @@ namespace cs_bjsubway
                     //站名实际坐标   
                     PointF ppf_str = new PointF(p.x + p.rx, p.y + p.ry);
                     Util.pointTrans(g_size, ref ppf_str, offset, scale_lvl);
-
+                    
                     //是站的话，画站
-                    if (p.st)
+                    if (p.st) //这里消耗18ms左右
                     {
                         //画站点圆圈
                         float rad = 11 * scale / 2; //圆的半径
                         PointF p_0 = new PointF(ppf.X - rad, ppf.Y - rad);
                         g.FillEllipse(brush, new RectangleF(p_0, new SizeF(11 * scale, 11 * scale)));
 
-
+                        
                         //不是换乘站,只写站名
                         if (p.ex == false)
                         { 
+                            //这里大约12-13ms
                             g.DrawString(sid, drawFont_p, Brushes.White, ppf_str.X, ppf_str.Y);
                         }
                         else//是换乘站的话，加到已经画过的list里；
@@ -189,8 +188,10 @@ namespace cs_bjsubway
             //画个中心十字
             g.DrawLine(Pens.Gray, g_size.Width / 2 - 10, g_size.Height / 2, g_size.Width / 2 + 10, g_size.Height / 2);
             g.DrawLine(Pens.Gray, g_size.Width / 2, g_size.Height / 2 - 10, g_size.Width / 2, g_size.Height / 2 + 10);
+
             DateTime et = DateTime.Now;
             Console.Out.WriteLine(string.Format("Paint() time cost: {0} sec", (et - st).ToString()));
+           
         }//end of paint
 
 

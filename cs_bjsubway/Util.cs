@@ -39,7 +39,7 @@ namespace cs_bjsubway
             JsonData jdata = JsonMapper.ToObject(str);
             return jdata;
         }
-
+        //废弃了
         public static void print_data(XElement data)
         {
             Console.Out.WriteLine("========== print data =========");
