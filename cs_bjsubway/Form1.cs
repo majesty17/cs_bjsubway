@@ -138,7 +138,7 @@ namespace cs_bjsubway
                     Util.pointTrans(g_size, ref ppf_str, offset, scale_lvl);
                     
                     //是站的话，画站
-                    if (p.st) //这里消耗18ms左右
+                    if (p.st && p.lb!="") //是站，并且名字不为空；这里消耗18ms左右
                     {
                         //画站点圆圈
                         float rad = 11 * scale / 2; //圆的半径
